@@ -1,17 +1,17 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { useState } from "react";
-import logoAsset from "@/assets/stocko-logo.png.asset.json";
-import brand1 from "@/assets/brands/brand-b1.png.asset.json";
-import brand2 from "@/assets/brands/brand-b2.png.asset.json";
-import brand3 from "@/assets/brands/brand-b3.png.asset.json";
-import brand4 from "@/assets/brands/brand-b4.png.asset.json";
-import brand5 from "@/assets/brands/brand-b5.png.asset.json";
-import brand6 from "@/assets/brands/brand-b6.png.asset.json";
-import brand7 from "@/assets/brands/brand-b7.png.asset.json";
-import brand8 from "@/assets/brands/brand-b8.png.asset.json";
-import brand9 from "@/assets/brands/brand-b9.png.asset.json";
-import brand10 from "@/assets/brands/brand-b10.png.asset.json";
-import brand11 from "@/assets/brands/brand-b11.png.asset.json";
+import logoAsset from "@/assets/stocko-logo.png";
+import brand1 from "@/assets/brands/brand-b1.png";
+import brand2 from "@/assets/brands/brand-b2.png";
+import brand3 from "@/assets/brands/brand-b3.png";
+import brand4 from "@/assets/brands/brand-b4.png";
+import brand5 from "@/assets/brands/brand-b5.png";
+import brand6 from "@/assets/brands/brand-b6.png";
+import brand7 from "@/assets/brands/brand-b7.png";
+import brand8 from "@/assets/brands/brand-b8.png";
+import brand9 from "@/assets/brands/brand-b9.png";
+import brand10 from "@/assets/brands/brand-b10.png";
+import brand11 from "@/assets/brands/brand-b11.png";
 
 const BRAND_IMAGES = [
   brand1,
@@ -101,7 +101,7 @@ function Nav() {
   return (
     <nav className="sw-nav">
       <div className="sw-logo" onClick={() => scrollToSection("about-section")}>
-        <img src={logoAsset.url} alt="Stocko Wholesale" />
+        <img src={logoAsset} alt="Stocko Wholesale" />
       </div>
       <ul className="sw-nav-links">
         {links.map((link) => (
@@ -284,7 +284,7 @@ function Index() {
             {[0, 1].map((set) =>
               BRAND_IMAGES.map((asset, i) => (
                 <div className="sw-brand-chip" key={`${set}-${i}`}>
-                  <img src={asset.url} alt={`Brand logo ${i + 1}`} />
+                  <img src={asset} alt={`Brand logo ${i + 1}`} />
                 </div>
               )),
             )}

@@ -171,13 +171,15 @@ function Index() {
     <div className="sw-page">
       <Nav />
 
-      <Hero />
+      <div className="sw-hero-wrapper">
+        <Hero />
 
-      <div className="sw-first-banner">
-        <p>
-          🏆 Stocko Wholesale — Kerala's pioneering wholesale store. A first-of-its-kind
-          shopping experience for businesses across the state.
-        </p>
+        <div className="sw-first-banner">
+          <p>
+            🏆 Stocko Wholesale — Kerala's pioneering wholesale store. A first-of-its-kind
+            shopping experience for businesses across the state.
+          </p>
+        </div>
       </div>
 
       <div className="sw-stats">

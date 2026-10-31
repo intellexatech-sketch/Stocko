@@ -6,6 +6,9 @@
 // You can pass additional config via defineConfig({ vite: { ... }, etc... }) if needed.
 import { defineConfig } from "@lovable.dev/vite-tanstack-config";
 
+// Ensure Lovable asset proxy resolves when running local dev server outside sandbox
+process.env.LOVABLE_PREVIEW_HOST ||= "id-preview--4116dc27-c02d-448f-9db5-0e4d2f308f03.lovable.app";
+
 export default defineConfig({
   tanstackStart: {
     // Redirect TanStack Start's bundled server entry to src/server.ts (our SSR error wrapper).

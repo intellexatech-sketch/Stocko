@@ -92,34 +92,81 @@ export const Route = createFileRoute("/")({
 });
 
 function Nav() {
+  const [menuOpen, setMenuOpen] = useState(false);
   const links = [
     { label: "About", target: "about-section" },
     { label: "How It Works", target: "how-section" },
     { label: "Products", target: "categories-section" },
     { label: "Contact", target: "contact-section" },
   ];
+
+  const handleNavClick = (target: string) => {
+    setMenuOpen(false);
+    scrollToSection(target);
+  };
+
   return (
-    <nav className="sw-nav">
-      <div className="sw-logo" onClick={() => scrollToSection("about-section")}>
-        <img src={logoAsset} alt="Stocko Wholesale" />
+    <header className="sw-nav-wrapper">
+      <nav className="sw-nav">
+        <div className="sw-logo" onClick={() => handleNavClick("about-section")}>
+          <img src={logoAsset} alt="Stocko Wholesale" />
+        </div>
+        <ul className="sw-nav-links">
+          {links.map((link) => (
+            <li key={link.target}>
+              <button type="button" onClick={() => handleNavClick(link.target)}>
+                {link.label}
+              </button>
+            </li>
+          ))}
+        </ul>
+        <button
+          type="button"
+          className="sw-nav-cta"
+          onClick={() => handleNavClick("contact-section")}
+        >
+          Visit Us
+        </button>
+
+        <button
+          type="button"
+          className={`sw-nav-toggle ${menuOpen ? "open" : ""}`}
+          onClick={() => setMenuOpen((prev) => !prev)}
+          aria-label={menuOpen ? "Close menu" : "Open menu"}
+          aria-expanded={menuOpen}
+        >
+          <span className="sw-nav-toggle-bar" />
+          <span className="sw-nav-toggle-bar" />
+          <span className="sw-nav-toggle-bar" />
+        </button>
+      </nav>
+
+      <div className={`sw-mobile-menu ${menuOpen ? "open" : ""}`}>
+        <ul className="sw-mobile-links">
+          {links.map((link) => (
+            <li key={link.target}>
+              <button type="button" onClick={() => handleNavClick(link.target)}>
+                {link.label}
+              </button>
+            </li>
+          ))}
+        </ul>
+        <button
+          type="button"
+          className="sw-mobile-cta"
+          onClick={() => handleNavClick("contact-section")}
+        >
+          Visit Us
+        </button>
       </div>
-      <ul className="sw-nav-links">
-        {links.map((link) => (
-          <li key={link.target}>
-            <button type="button" onClick={() => scrollToSection(link.target)}>
-              {link.label}
-            </button>
-          </li>
-        ))}
-      </ul>
-      <button
-        type="button"
-        className="sw-nav-cta"
-        onClick={() => scrollToSection("contact-section")}
-      >
-        Visit Us
-      </button>
-    </nav>
+      {menuOpen && (
+        <div
+          className="sw-mobile-backdrop"
+          onClick={() => setMenuOpen(false)}
+          aria-hidden="true"
+        />
+      )}
+    </header>
   );
 }
 

@@ -87,6 +87,7 @@
   --sw-whatsapp: oklch(0.761 0.201 149.7);
   --sw-whatsapp-hover: oklch(0.7 0.19 149.7);
   --sw-success: oklch(0.627 0.17 149.2);
+  --sw-error: oklch(0.637 0.237 25.3);
   --sw-step-border: oklch(0.917 0.025 263.3);
   --sw-cat-bg: oklch(0.985 0.007 268.5);
   --sw-strip-border: oklch(0.945 0.016 262.8);
@@ -144,6 +145,7 @@
   --sw-whatsapp: oklch(0.761 0.201 149.7);
   --sw-whatsapp-hover: oklch(0.7 0.19 149.7);
   --sw-success: oklch(0.627 0.17 149.2);
+  --sw-error: oklch(0.637 0.237 25.3);
   --sw-step-border: oklch(0.917 0.025 263.3);
   --sw-cat-bg: oklch(0.985 0.007 268.5);
   --sw-strip-border: oklch(0.945 0.016 262.8);
@@ -287,7 +289,9 @@ html {
   height: 2.5px;
   background-color: oklch(1 0 0);
   border-radius: 2px;
-  transition: transform 0.25s ease, opacity 0.25s ease;
+  transition:
+    transform 0.25s ease,
+    opacity 0.25s ease;
 }
 .sw-nav-toggle.open .sw-nav-toggle-bar:nth-child(1) {
   transform: translateY(7.5px) rotate(45deg);
@@ -844,12 +848,33 @@ html {
   cursor: pointer;
   font-family: inherit;
 }
-.sw-contact-form button:hover {
+.sw-contact-form button:hover:not(:disabled) {
   background: var(--sw-yellow-hover);
+}
+.sw-contact-form button:disabled {
+  opacity: 0.75;
+  cursor: not-allowed;
 }
 .sw-contact-form button.sent {
   background: var(--sw-success);
   color: oklch(1 0 0);
+}
+.sw-form-msg {
+  font-size: 0.9rem;
+  padding: 0.7rem 0.95rem;
+  border-radius: 8px;
+  line-height: 1.45;
+  word-break: break-word;
+}
+.sw-form-msg.error {
+  background: oklch(0.28 0.08 25.3 / 0.55);
+  border: 1px solid var(--sw-error);
+  color: oklch(0.96 0.04 25.3);
+}
+.sw-form-msg.success {
+  background: oklch(0.28 0.08 149.2 / 0.55);
+  border: 1px solid var(--sw-success);
+  color: oklch(0.96 0.04 149.2);
 }
 .sw-whatsapp-btn {
   display: inline-flex;
@@ -920,7 +945,9 @@ html {
     transform: translateY(-8px);
     opacity: 0;
     pointer-events: none;
-    transition: transform 0.2s ease, opacity 0.2s ease;
+    transition:
+      transform 0.2s ease,
+      opacity 0.2s ease;
   }
   .sw-mobile-menu.open {
     transform: translateY(0);
@@ -947,7 +974,9 @@ html {
     cursor: pointer;
     font-family: inherit;
     border-radius: 8px;
-    transition: background 0.15s, color 0.15s;
+    transition:
+      background 0.15s,
+      color 0.15s;
   }
   .sw-mobile-links button:active,
   .sw-mobile-links button:hover {

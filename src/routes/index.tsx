@@ -1,5 +1,6 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { useState } from "react";
+import { sendContactEmail } from "@/server/mail";
 import logoAsset from "@/assets/stocko-logo.png";
 import brand1 from "@/assets/brands/brand-b1.png";
 import brand2 from "@/assets/brands/brand-b2.png";
@@ -28,19 +29,49 @@ const BRAND_IMAGES = [
 ];
 
 const CATEGORIES = [
-  { name: "Staples", image: "https://images.unsplash.com/photo-1775433205046-86e060feff06?w=800&q=80" },
-  { name: "FMCG", image: "https://images.unsplash.com/photo-1739066598279-1297113f5c6a?w=800&q=80" },
-  { name: "Home & Kitchen", image: "https://images.unsplash.com/photo-1633536704679-de310869515b?w=800&q=80" },
-  { name: "House & Cleaning", image: "https://images.unsplash.com/photo-1623949786120-5cee72ef63f9?w=800&q=80" },
-  { name: "General Merchandising", image: "https://images.unsplash.com/photo-1624831466206-5b15053baabb?w=800&q=80" },
-  { name: "Personal Care", image: "https://images.unsplash.com/photo-1492552085122-36706c238263?w=800&q=80" },
+  {
+    name: "Staples",
+    image: "https://images.unsplash.com/photo-1775433205046-86e060feff06?w=800&q=80",
+  },
+  {
+    name: "FMCG",
+    image: "https://images.unsplash.com/photo-1739066598279-1297113f5c6a?w=800&q=80",
+  },
+  {
+    name: "Home & Kitchen",
+    image: "https://images.unsplash.com/photo-1633536704679-de310869515b?w=800&q=80",
+  },
+  {
+    name: "House & Cleaning",
+    image: "https://images.unsplash.com/photo-1623949786120-5cee72ef63f9?w=800&q=80",
+  },
+  {
+    name: "General Merchandising",
+    image: "https://images.unsplash.com/photo-1624831466206-5b15053baabb?w=800&q=80",
+  },
+  {
+    name: "Personal Care",
+    image: "https://images.unsplash.com/photo-1492552085122-36706c238263?w=800&q=80",
+  },
 ];
 
 const STEPS = [
-  { title: "Visit Our Store", text: "Come to Stocko Wholesale in Kuttiadi — open Monday to Saturday, 8 AM to 6:30 PM." },
-  { title: "Browse & Pick", text: "Choose from thousands of products across every category at wholesale prices." },
-  { title: "Pay at Counter", text: "Pay for your goods at our checkout — simple, straightforward, no hidden charges." },
-  { title: "Walk Out With Your Stock", text: "Carry your goods straight from our store — no waiting needed." },
+  {
+    title: "Visit Our Store",
+    text: "Come to Stocko Wholesale in Kuttiadi — open Monday to Saturday, 8 AM to 6:30 PM.",
+  },
+  {
+    title: "Browse & Pick",
+    text: "Choose from thousands of products across every category at wholesale prices.",
+  },
+  {
+    title: "Pay at Counter",
+    text: "Pay for your goods at our checkout — simple, straightforward, no hidden charges.",
+  },
+  {
+    title: "Walk Out With Your Stock",
+    text: "Carry your goods straight from our store — no waiting needed.",
+  },
 ];
 
 const ABOUT_BOXES = [
@@ -51,12 +82,36 @@ const ABOUT_BOXES = [
 ];
 
 const WHY_CARDS = [
-  { icon: "🏆", title: "First of Its Kind in Kerala", text: "A pioneering wholesale concept — bringing a new, smarter way to buy stock to businesses across the state." },
-  { icon: "💰", title: "True Wholesale Prices", text: "Buy in bulk and save significantly — the more you buy, the more you save." },
-  { icon: "🏠", title: "Walk In & Walk Out", text: "Visit our store in Kuttiadi, browse our shelves, pay, and carry your stock home immediately." },
-  { icon: "📦", title: "Thousands of Products", text: "Every category your business needs, all available under one roof at Stocko." },
-  { icon: "✅", title: "Quality You Can Trust", text: "Every product on our shelves is sourced from verified suppliers and meets quality standards." },
-  { icon: "📅", title: "10+ Years of Experience", text: "Over a decade of serving businesses across Kozhikode with the best wholesale products." },
+  {
+    icon: "🏆",
+    title: "First of Its Kind in Kerala",
+    text: "A pioneering wholesale concept — bringing a new, smarter way to buy stock to businesses across the state.",
+  },
+  {
+    icon: "💰",
+    title: "True Wholesale Prices",
+    text: "Buy in bulk and save significantly — the more you buy, the more you save.",
+  },
+  {
+    icon: "🏠",
+    title: "Walk In & Walk Out",
+    text: "Visit our store in Kuttiadi, browse our shelves, pay, and carry your stock home immediately.",
+  },
+  {
+    icon: "📦",
+    title: "Thousands of Products",
+    text: "Every category your business needs, all available under one roof at Stocko.",
+  },
+  {
+    icon: "✅",
+    title: "Quality You Can Trust",
+    text: "Every product on our shelves is sourced from verified suppliers and meets quality standards.",
+  },
+  {
+    icon: "📅",
+    title: "10+ Years of Experience",
+    text: "Over a decade of serving businesses across Kozhikode with the best wholesale products.",
+  },
 ];
 
 const WHATSAPP_ICON_PATH =
@@ -160,11 +215,7 @@ function Nav() {
         </button>
       </div>
       {menuOpen && (
-        <div
-          className="sw-mobile-backdrop"
-          onClick={() => setMenuOpen(false)}
-          aria-hidden="true"
-        />
+        <div className="sw-mobile-backdrop" onClick={() => setMenuOpen(false)} aria-hidden="true" />
       )}
     </header>
   );
@@ -180,9 +231,8 @@ function Hero() {
         <span>Save Bigger.</span>
       </h1>
       <p>
-        Stocko Wholesale brings you an entirely new way to shop for your business — walk in,
-        pick from thousands of products, and walk out with your stock at the best wholesale
-        prices.
+        Stocko Wholesale brings you an entirely new way to shop for your business — walk in, pick
+        from thousands of products, and walk out with your stock at the best wholesale prices.
       </p>
       <div className="sw-hero-btns">
         <button
@@ -205,13 +255,76 @@ function Hero() {
 }
 
 function Index() {
+  const [submitting, setSubmitting] = useState(false);
   const [sent, setSent] = useState(false);
+  const [feedback, setFeedback] = useState<{
+    type: "success" | "error";
+    message: string;
+  } | null>(null);
 
-  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    setSent(true);
-    e.currentTarget.reset();
-    setTimeout(() => setSent(false), 3000);
+    if (submitting) return;
+
+    const form = e.currentTarget;
+    const formData = new FormData(form);
+    const name = String(formData.get("name") ?? "").trim();
+    const business = String(formData.get("business") ?? "").trim();
+    const phone = String(formData.get("phone") ?? "").trim();
+    const email = String(formData.get("email") ?? "").trim();
+    const message = String(formData.get("message") ?? "").trim();
+
+    if (!name || !phone) {
+      setFeedback({
+        type: "error",
+        message: "Please fill in all required fields (Your name and Phone number).",
+      });
+      return;
+    }
+
+    setSubmitting(true);
+    setFeedback(null);
+
+    try {
+      const res = await sendContactEmail({
+        data: {
+          name,
+          business,
+          phone,
+          email,
+          message,
+        },
+      });
+
+      if (res.success) {
+        setSent(true);
+        setFeedback({
+          type: "success",
+          message: res.message,
+        });
+        form.reset();
+        setTimeout(() => {
+          setSent(false);
+          setFeedback(null);
+        }, 6000);
+      } else {
+        setFeedback({
+          type: "error",
+          message: res.message,
+        });
+      }
+    } catch (err) {
+      const errorMsg =
+        err instanceof Error
+          ? err.message
+          : "Something went wrong while sending your message. Please try again.";
+      setFeedback({
+        type: "error",
+        message: errorMsg,
+      });
+    } finally {
+      setSubmitting(false);
+    }
   };
 
   return (
@@ -223,8 +336,8 @@ function Index() {
 
         <div className="sw-first-banner">
           <p>
-            🏆 Stocko Wholesale — Kerala's pioneering wholesale store. A first-of-its-kind
-            shopping experience for businesses across the state.
+            🏆 Stocko Wholesale — Kerala's pioneering wholesale store. A first-of-its-kind shopping
+            experience for businesses across the state.
           </p>
         </div>
       </div>
@@ -253,13 +366,13 @@ function Index() {
           <div className="sw-section-tag">Who We Are</div>
           <h2 className="sw-section-title">Kerala's First Store of Its Kind</h2>
           <p className="sw-section-sub">
-            Stocko Wholesale is a pioneering wholesale store in Kerala where businesses can
-            walk in, browse thousands of products across every category, and carry their
-            stock home — all at bulk wholesale prices.
+            Stocko Wholesale is a pioneering wholesale store in Kerala where businesses can walk in,
+            browse thousands of products across every category, and carry their stock home — all at
+            bulk wholesale prices.
           </p>
           <p style={{ color: "var(--sw-muted)", fontSize: "0.95rem", lineHeight: 1.7 }}>
-            We are a physical store in Kuttiadi — just walk in, pick what your business
-            needs, pay, and leave with your goods. Simple as that.
+            We are a physical store in Kuttiadi — just walk in, pick what your business needs, pay,
+            and leave with your goods. Simple as that.
           </p>
         </div>
         <div className="sw-about-visual">
@@ -289,8 +402,8 @@ function Index() {
         <div className="sw-section-tag">How It Works</div>
         <h2 className="sw-section-title">Wholesale Made Simple</h2>
         <p className="sw-section-sub">
-          Shopping wholesale at Stocko is as easy as walking into a store — because that's
-          exactly what it is.
+          Shopping wholesale at Stocko is as easy as walking into a store — because that's exactly
+          what it is.
         </p>
         <div className="sw-steps">
           {STEPS.map((step, i) => (
@@ -321,7 +434,11 @@ function Index() {
         </div>
       </section>
 
-      <section className="sw-brands-strip" id="brands-section" style={{ paddingLeft: 0, paddingRight: 0 }}>
+      <section
+        className="sw-brands-strip"
+        id="brands-section"
+        style={{ paddingLeft: 0, paddingRight: 0 }}
+      >
         <div className="sw-brands-strip-head">
           <div className="sw-section-tag">Brands We Stock</div>
           <h2>Trusted by the Biggest Names in the Business</h2>
@@ -342,9 +459,7 @@ function Index() {
       <section className="sw-section sw-why" id="why-section">
         <div className="sw-section-tag">Why Choose Stocko</div>
         <h2 className="sw-section-title">A Smarter Way to Buy Wholesale</h2>
-        <p className="sw-section-sub">
-          We're redefining how businesses in Kerala buy their stock.
-        </p>
+        <p className="sw-section-sub">We're redefining how businesses in Kerala buy their stock.</p>
         <div className="sw-why-grid">
           {WHY_CARDS.map((card) => (
             <div className="sw-why-card" key={card.title}>
@@ -401,21 +516,37 @@ function Index() {
             </a>
           </div>
           <form className="sw-contact-form" onSubmit={handleSubmit}>
-            <input type="text" name="name" placeholder="Your name" required />
-            <input type="text" name="business" placeholder="Business name" />
-            <input type="tel" name="phone" placeholder="Phone number" required />
-            <input type="email" name="email" placeholder="Email address" />
-            <textarea rows={4} name="message" placeholder="Any questions for us?" />
-            <button type="submit" className={sent ? "sent" : undefined}>
-              {sent ? "Message Sent!" : "Send Message"}
+            <input type="text" name="name" placeholder="Your name" required disabled={submitting} />
+            <input type="text" name="business" placeholder="Business name" disabled={submitting} />
+            <input
+              type="tel"
+              name="phone"
+              placeholder="Phone number"
+              required
+              disabled={submitting}
+            />
+            <input type="email" name="email" placeholder="Email address" disabled={submitting} />
+            <textarea
+              rows={4}
+              name="message"
+              placeholder="Any questions for us?"
+              disabled={submitting}
+            />
+            <button type="submit" disabled={submitting} className={sent ? "sent" : undefined}>
+              {submitting ? "Sending..." : sent ? "Message Sent!" : "Send Message"}
             </button>
+            {feedback && (
+              <div className={`sw-form-msg ${feedback.type}`} role="alert">
+                {feedback.message}
+              </div>
+            )}
           </form>
         </div>
       </section>
 
       <footer className="sw-footer">
-        © 2026 <span>Stocko Wholesale</span>. All rights reserved. &nbsp;|&nbsp; Kerala's
-        First Wholesale Store of Its Kind
+        © 2026 <span>Stocko Wholesale</span>. All rights reserved. &nbsp;|&nbsp; Kerala's First
+        Wholesale Store of Its Kind
       </footer>
     </div>
   );
